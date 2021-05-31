@@ -10,8 +10,8 @@ auth = BasicAuth(app)
 
 mysql = MySQL()
 app.config['MYSQL_DATABASE_USER'] = 'silale'
-app.config['MYSQL_DATABASE_PASSWORD'] = '123456' #insira a sua senha do DB
-app.config['MYSQL_DATABASE_DB'] = 'db_clientes' #insira o nome do seu DB
+app.config['MYSQL_DATABASE_PASSWORD'] = 'silale2021' #insira a sua senha do DB
+app.config['MYSQL_DATABASE_DB'] = 'db_silale' #insira o nome do seu DB
 #app.config['MYSQL_DATABASE_DB'] = 'db_produtos' #insira o nome do seu DB
 #app.config['MYSQL_DATABASE_DB'] = 'db_vendas' #insira o nome do seu DB
 app.config['MYSQL_DATABASE_HOST'] = 'db-silale.cxycaymkd24m.us-east-1.rds.amazonaws.com' #colocar o localhost pelo endpoing rds
