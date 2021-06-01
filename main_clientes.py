@@ -21,7 +21,7 @@ def add_user():
         _senha = _json['senha']
 
         if _nome and _cpf and _email and _telefone and _senha and request.method == 'POST':
-            sqlQuery = "INSERT INTO db_silale.tbl_clientes (nome, cpf, email, telefone, senha) VALUES (%s,%s,%s,%s,%s)"
+            sqlQuery = "INSERT INTO db_clientes.tbl_clientes (nome, cpf, email, telefone, senha) VALUES (%s,%s,%s,%s,%s)"
             bindData = (_nome, _cpf, _email, _telefone, _senha)
             conn = mysql.connect()
             cursor = conn.cursor(pymysql.cursors.DictCursor)         
@@ -48,7 +48,7 @@ def get_user():
         print (request)
         conn = mysql.connect()
         cursor = conn.cursor(pymysql.cursors.DictCursor)
-        cursor.execute ("SELECT id, nome, cpf, email, telefone, senha FROM db_silale.tbl_clientes")
+        cursor.execute ("SELECT id, nome, cpf, email, telefone, senha FROM db_clientes.tbl_clientes")
         userRows = cursor.fetchall()
         response = jsonify(userRows)
         response.status_code == 200
@@ -67,7 +67,7 @@ def id_user(id):
     try:
         conn = mysql.connect()
         cursor = conn.cursor(pymysql.cursors.DictCursor)
-        cursor.execute ("SELECT id, nome, cpf, email, telefone, senha FROM db_silale.tbl_clientes WHERE id =%s", id)
+        cursor.execute ("SELECT id, nome, cpf, email, telefone, senha FROM db_clientes.tbl_clientes WHERE id =%s", id)
         userRow = cursor.fetchone()
         if not userRow:
             return Response('Usuário não cadastrado', status=404)
@@ -93,7 +93,7 @@ def update_user():
         _telefone = _json['telefone']
         _senha = _json['senha'] 
         if _nome and _cpf and _email and _telefone and _senha and _id and request.method == 'PUT':
-            sqlQuery = "UPDATE db_silale.tbl_clientes SET nome=%s, cpf=%s, email=%s, telefone=%s, senha=%s WHERE id=%s"
+            sqlQuery = "UPDATE db_clientes.tbl_clientes SET nome=%s, cpf=%s, email=%s, telefone=%s, senha=%s WHERE id=%s"
             bindData = (_nome, _cpf, _email, _telefone, _senha, _id)
             conn = mysql.connect()
             cursor = conn.cursor()
@@ -117,7 +117,7 @@ def delete_user(id):
     try:
         conn = mysql.connect()
         cursor = conn.cursor()
-        cursor.execute("DELETE FROM db_silale.tbl_clientes WHERE id =%s", (id,))
+        cursor.execute("DELETE FROM db_clientes.tbl_clientes WHERE id =%s", (id,))
         conn.commit()
         response = jsonify('Cliente deletado com sucesso!')
         response.status_code = 200
@@ -141,4 +141,4 @@ def not_found(error=None):
     return response
 
 if __name__ == "__main__":
-    app.run(debug=True, host = "0.0.0.0", port = 5000)
+    app.run(debug=True, host = "0.0.0.0", port = 80)
